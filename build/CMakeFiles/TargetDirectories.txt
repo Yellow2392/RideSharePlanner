@@ -1,0 +1,3 @@
+C:/Users/Soporte/Vs projects/Additive Tree/build/CMakeFiles/RideSharePlanner.dir
+C:/Users/Soporte/Vs projects/Additive Tree/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Soporte/Vs projects/Additive Tree/build/CMakeFiles/ZERO_CHECK.dir

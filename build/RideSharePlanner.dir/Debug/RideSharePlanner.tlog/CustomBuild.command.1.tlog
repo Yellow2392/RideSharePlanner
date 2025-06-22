@@ -1,0 +1,10 @@
+^C:\USERS\SOPORTE\VS PROJECTS\ADDITIVE TREE\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Soporte/Vs projects/Additive Tree" "-BC:/Users/Soporte/Vs projects/Additive Tree/build" --check-stamp-file "C:/Users/Soporte/Vs projects/Additive Tree/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
