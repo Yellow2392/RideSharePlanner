@@ -4,9 +4,9 @@ project(RideSharePlanner)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(RideSharePlanner
-    main.cpp
-    planner_gas.cpp
-    planner_gaso1.cpp
-    planner_gaso2.cpp
-    additive_tree.cpp
+    src/main.cpp
+    src/planner_gas.cpp
+    src/planner_gaso1.cpp
+    src/planner_gaso2.cpp
+    src/additive_tree.cpp
 )
