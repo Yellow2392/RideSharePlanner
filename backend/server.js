@@ -1,6 +1,7 @@
 import express from 'express';
 import { spawn } from 'child_process';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -26,6 +27,23 @@ app.post('/run', (req, res) => {
     res.type('text/plain').send(out);
   });
 });
+
+app.post('/save', (req, res) => {
+  const data = req.body;
+  const filename = `data/data.json`;
+  const filepath = path.join(__dirname, filename);
+
+  fs.mkdirSync(path.dirname(filepath), { recursive: true });
+  fs.writeFile(filepath, JSON.stringify(data, null, 2), (err) => {
+    if (err) {
+      console.error('❌ Error al guardar:', err);
+      return res.status(500).send('Error al guardar el archivo');
+    }
+    console.log('✅ Guardado en:', filename);
+    res.json({ ok: true, file: filename });
+  });
+});
+
 
 app.listen(port, () =>
   console.log(`✅ Backend en http://localhost:${port}/run`)

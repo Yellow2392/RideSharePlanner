@@ -91,6 +91,27 @@ export default function Planner() {
   };
   // --------------------------------------------
 
+  const saveOnServer = async () => {
+    try {
+      const res = await fetch('/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ requests: reqs, vehicles: vehs }),
+      });
+
+      if (!res.ok) {
+        const msg = await res.text();        // HTML o texto de error
+        alert('Error al guardar:\n' + msg);
+        return;
+      }
+
+      const data = await res.json();          // ← solo si la respuesta es JSON
+      alert('✔ Guardado en:\n' + data.file);
+    } catch (err) {
+      console.error(err);
+      alert('Error de red o servidor');
+    }
+  };
   const run = async () => {
     try {
       const res  = await fetch('/run', {
@@ -112,6 +133,7 @@ export default function Planner() {
         <button onClick={addVeh} style={styles.button}>+Vehicle</button>
         <button onClick={run}     style={styles.button}>Ejecutar</button>
         <button onClick={downloadJson} style={styles.button}>Descargar JSON</button>
+        <button onClick={saveOnServer}    style={styles.button}>Guardar en servidor</button>
       </div>
 
       {/* ---------- tabla Requests ---------- */}
