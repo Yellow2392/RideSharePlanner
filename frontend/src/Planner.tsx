@@ -52,29 +52,30 @@ export default function Planner() {
 
   /* ------------------- DEMO ------------------- */
   const addReq = () => {
-    const pick    = [rand(0, 20), rand(0, 20)];
-    const drop    = [rand(0, 20), rand(0, 20)];
-    const release = rand(0, 10);
+    const pick    = [rand(0, 50), rand(0, 50)];
+    const drop    = [rand(0, 50), rand(0, 50)];
+    const release = rand(0, 30);
     const dist    = Math.abs(pick[0] - drop[0]) + Math.abs(pick[1] - drop[1]);
-    const deadline = release + dist + rand(Math.floor(dist*0.3), Math.floor(dist*0.7));
+    const buffer = rand(30, 50);
+    const deadline = release + dist + buffer /*rand(Math.floor(dist*0.3), Math.floor(dist*0.7))*/;
 
     setReqs(r => [...r, {
       id: r.length + 1,
-      pick, drop, release, deadline,
-      passengers: 1,
-      payment: rand(5, 10)
+      pick, drop, release, deadline,  
+      passengers: rand(1, 2),
+      payment: rand(5, 15)
     }]);
   };
 
   const addVeh = () =>
     setVehs(v => [...v, {
       id: v.length + 1,
-      start: [rand(0, 20), rand(0, 20)],
+      start: [rand(0, 50), rand(0, 50)],
       capacity: 4,
     }]);
   /* -------------------------------------------- */
 
-  // 🆕 ------------- DESCARGAR JSON -------------
+  //------------- JSON -------------
   const downloadJson = () => {
     const data = { requests: reqs, vehicles: vehs };
     const json = JSON.stringify(data, null, 2); 
@@ -84,7 +85,7 @@ export default function Planner() {
     const a = document.createElement('a');
     const ts = new Date().toISOString().replace(/[:.]/g, '-');
     a.href = url;
-    a.download = `rideshare_${ts}.json`;
+    a.download = `datos.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -171,7 +172,7 @@ export default function Planner() {
         </table>
       )}
 
-      {/* ---------- salida del algoritmo ---------- */}
+      {/* ---------- salida ---------- */}
     <pre style={styles.pre}>{out}</pre>
     </div>
   );
