@@ -13,6 +13,7 @@ void planRoutesGASO1(std::vector<Request>& requests, std::vector<Vehicle>& vehic
     for (auto& vehicle : vehicles) {
         TreeNode* best = nullptr;
         double maxProfit = -1.0;
+        std::vector<Request> bestGroupForVehicle; // Guardamos el best group (NEW: PARA GUI)
 
         for (TreeNode* node : tree.getAllNodes()) {
             if (node->requestIds.size() > (size_t)vehicle.capacity) continue;
@@ -38,6 +39,7 @@ void planRoutesGASO1(std::vector<Request>& requests, std::vector<Vehicle>& vehic
             if (node->profit > maxProfit) {
                 maxProfit = node->profit;
                 best = node;
+                bestGroupForVehicle = group; // NEW : PARA GUI
             }
         }
 
@@ -45,6 +47,15 @@ void planRoutesGASO1(std::vector<Request>& requests, std::vector<Vehicle>& vehic
             for (int id : best->requestIds) {
                 assignedRequestIds.insert(id);
                 vehicle.assignedRequestIds.push_back(id);
+            }
+
+            // Poblando currentRoutePath (PARA GUI)
+            vehicle.currentRoutePath.clear();
+            vehicle.currentRoutePath.push_back(vehicle.location);
+
+            for (const auto& r : bestGroupForVehicle) {
+                vehicle.currentRoutePath.push_back(r.origin);
+                vehicle.currentRoutePath.push_back(r.destination);
             }
 
             std::cout << "Vehicle " << vehicle.id << " assigned requests: ";
