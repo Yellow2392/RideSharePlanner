@@ -75,6 +75,15 @@ void planRoutesGAS(std::vector<Request>& requests, std::vector<Vehicle>& vehicle
             std::cout << "Vehicle " << v.id << " assigned requests: ";
             for (auto& r : bestGroup) std::cout << r.id << " ";
             std::cout << " | Total Payment: " << maxProfit << "\n";
+
+            /// Poblando currentRoutePath (PARA GUI)
+            v.currentRoutePath.clear();
+            v.currentRoutePath.push_back(v.location);
+
+            for (const auto& r : bestGroup) {
+                v.currentRoutePath.push_back(r.origin);
+                v.currentRoutePath.push_back(r.destination);
+            }
         }
     }
 }
