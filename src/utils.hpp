@@ -32,6 +32,7 @@ inline double calculateMinSlack(const Vehicle& v, const std::vector<Request>& gr
 
     return minSlack;
 }
+/*
 //? generacion de requests aleatoria para testear
 inline std::vector<Request> generateRandomRequests(int n, int maxCoord = 50, int maxTime = 100, int maxPayment = 10) {
     std::vector<Request> requests;
@@ -66,5 +67,5 @@ inline std::vector<Vehicle> generateVehicles(int m, int capacity = 3, int maxCoo
     }
     return vehicles;
 }
-
+*/
 #endif
