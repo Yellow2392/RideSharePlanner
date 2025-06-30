@@ -10,6 +10,8 @@ struct Vehicle {
     std::pair<double, double> location;
     int capacity;
     std::vector<int> assignedRequestIds;
+
+    std::vector<std::pair<double, double>> currentRoutePath;
 };
 
 #endif
