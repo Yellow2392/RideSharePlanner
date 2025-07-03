@@ -5,8 +5,13 @@
 #include <iostream>
 
 void planRoutesGASO1(std::vector<Request>& requests, std::vector<Vehicle>& vehicles) {
-    AdditiveTree tree(requests, 3);  //arbol global.
-    //! suponiendo que la máxima capacidad posible de los vehículos es 3
+    int maxCap = 0;
+    for (const auto& v : vehicles) {
+        maxCap = std::max(maxCap, v.capacity);
+    }
+
+    AdditiveTree tree(requests, maxCap);  //arbol global.
+    //! debe ocupar la máxima capacidad que hay entre los vehiculos si va a ser arbol general
 
     std::set<int> assignedRequestIds;
 
